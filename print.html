@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workshop Web Dev - Universitas Lamappapoleonro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* --- CORE STYLES --- */
+      body {
+        font-family: "Outfit", sans-serif;
+        background-color: #ffffff;
+        color: #1e293b;
+      }
+      .hand-font {
+        font-family: "Patrick Hand", cursive;
+      }
+
+      /* --- GOOGLE COLORS --- */
+      .text-g-blue {
+        color: #1967d2;
+      }
+      .border-g-blue {
+        border-color: #4285f4;
+      }
+      .text-g-red {
+        color: #c5221f;
+      }
+      .border-g-red {
+        border-color: #ea4335;
+      }
+      .text-g-yellow {
+        color: #b45309;
+      }
+      .border-g-yellow {
+        border-color: #fbbc05;
+      }
+      .text-g-green {
+        color: #137333;
+      }
+      .border-g-green {
+        border-color: #34a853;
+      }
+
+      /* --- VISUALISASI ANATOMI (PROPORSIONAL CSS) --- */
+      .anatomy-container {
+        width: 100%;
+        height: 400px;
+        background: #f8fafc;
+        border: 2px dashed #cbd5e1;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* 1. MAIN (RED) */
+      .wf-main {
+        width: 100%;
+        height: 100%;
+        border: 3px solid #ea4335;
+        background: #fff5f5;
+        border-radius: 8px;
+        position: relative;
+        display: flex; /* Flexbox Parent */
+        padding: 8px;
+        gap: 8px;
+      }
+      .label-main {
+        position: absolute;
+        top: -14px;
+        left: 10px;
+        background: #ea4335;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+
+      /* 2. LEFT SECTION (BLUE) - 40% Width */
+      .wf-left {
+        flex: 4; /* Kunci Proporsi 40% */
+        border: 3px solid #4285f4;
+        background: #e8f0fe;
+        border-radius: 6px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Header atas, Footer bawah */
+        padding: 10px;
+      }
+      .label-left {
+        position: absolute;
+        top: -12px;
+        left: 10px;
+        background: #4285f4;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+
+      /* 3. WRAPPER (YELLOW) - Centered */
+      .wf-wrapper {
+        border: 3px solid #fbbc05;
+        background: #fef7e0;
+        border-radius: 6px;
+        position: relative;
+        margin-top: auto; /* Magic Center */
+        margin-bottom: auto; /* Magic Center */
+        padding: 15px 5px;
+        text-align: center;
+      }
+      .label-wrapper {
+        position: absolute;
+        top: -10px;
+        right: 5px;
+        background: #fbbc05;
+        color: #744210;
+        font-size: 9px;
+        font-weight: bold;
+        padding: 1px 6px;
+        border-radius: 4px;
+      }
+
+      /* 4. RIGHT SECTION (GREEN) - 60% Width */
+      .wf-right {
+        flex: 6; /* Kunci Proporsi 60% */
+        border: 3px solid #34a853;
+        background: #e6f4ea;
+        border-radius: 6px;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 4px;
+        padding: 4px;
+      }
+      .label-right {
+        position: absolute;
+        top: -12px;
+        right: 10px;
+        background: #34a853;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+
+      /* Elements */
+      .wf-dashed {
+        border: 2px dashed #94a3b8;
+        color: #64748b;
+        font-size: 10px;
+        text-align: center;
+        padding: 4px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 4px;
+      }
+      .wf-grid-item {
+        background: #86efac;
+        border-radius: 4px;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #166534;
+        font-size: 10px;
+        font-weight: bold;
+      }
+
+      /* --- TAMBAHAN UNTUK PART 2 & 3 --- */
+
+      /* Code Block Styling */
+      pre {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        overflow-x: auto;
+        font-size: 0.85rem;
+        border: 1px solid #333;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Syntax Colors (Manual) */
+      .tag-html {
+        color: #569cd6;
+      }
+      .attr-html {
+        color: #9cdcfe;
+      }
+      .val-html {
+        color: #ce9178;
+      }
+      .comment-html {
+        color: #6a9955;
+        font-style: italic;
+      }
+
+      .sel-css {
+        color: #d7ba7d;
+      }
+      .prop-css {
+        color: #9cdcfe;
+      }
+      .val-css {
+        color: #ce9178;
+      }
+
+      /* Step Number Badge */
+      .step-badge {
+        width: 32px;
+        height: 32px;
+        background: #1e293b;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+
+      /* Utilitas Wireframe Focus */
+      .wf-dimmed {
+        opacity: 0.3;
+        border-style: dashed !important;
+        background-color: transparent !important;
+      }
+      .wf-highlight {
+        box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.3);
+        transform: scale(1.02);
+        transition: 0.3s;
+        z-index: 10;
+      }
+
+      @media print {
+  @page {
+    size: A4 landscape; /* Kunci: Memanjang ke samping */
+    margin: 1cm; /* Margin cukup */
+  }
+
+  /* 2. Reset Body & Warna */
+  body {
+    -webkit-print-color-adjust: exact !important; /* Paksa warna background muncul */
+    print-color-adjust: exact !important;
+    background-color: white !important;
+    color: black !important;
+    font-size: 11pt; /* Ukuran font nyaman dibaca */
+    width: 100%;
+  }
+
+  /* 3. Layout Grid 2 Kolom (Penting buat Landscape) */
+  /* Memaksa tampilan tetap 2 kolom, tidak turun ke bawah */
+  .md\:grid-cols-2 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important; /* Jarak antar kolom lebih lega */
+    align-items: start !important;
+  }
+
+  /* 4. Hapus Elemen Pengganggu (Hemat Tinta & Bersih) */
+  .shadow-xl,
+  .shadow-lg,
+  .shadow-sm,
+  .shadow {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important; /* Ganti bayangan dengan garis tipis */
+  }
+
+  /* Hapus dekorasi background blur yang berat */
+  .blur-3xl,
+  .bg-gradient-to-br,
+  .bg-gradient-to-bl,
+  .opacity-60,
+  .opacity-40 {
+    display: none !important;
+  }
+
+  /* Hapus animasi */
+  .animate-bounce,
+  .animate-pulse {
+    animation: none !important;
+  }
+
+  /* 5. Manajemen Halaman (Anti-Potong) */
+  /* Mencegah kotak materi/kodingan terpotong di tengah halaman */
+  section,
+  pre,
+  .anatomy-container,
+  .bg-gray-50,
+  .bg-white,
+  header {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* 6. Perbaikan Khusus Header */
+  header .flex-col {
+    flex-direction: row !important; /* Foto & Teks jejer samping */
+    align-items: center !important;
+  }
+  header .text-center {
+    text-align: left !important;
+  }
+  header .justify-center {
+    justify-content: flex-start !important;
+  }
+
+  /* 7. Perbaikan Code Block */
+  pre {
+    background-color: #1e1e1e !important; /* Tetap gelap biar kontras */
+    color: #d4d4d4 !important;
+    border: 1px solid #999 !important;
+    white-space: pre-wrap !important; /* Bungkus text panjang */
+    page-break-inside: avoid !important;
+  }
+
+  /* 8. Maksimalkan Lebar Konten */
+  .max-w-6xl,
+  .mx-auto {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+    </style>
+  </head>
+  <body class="p-4 md:p-10 max-w-6xl mx-auto">
+    <header class="mb-20">
+      <div
+        class="bg-white rounded-3xl p-8 md:p-12 border border-gray-100 shadow-xl relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-blue-50 to-transparent rounded-bl-full -mr-20 -mt-20 opacity-60"
+        ></div>
+
+        <div
+          class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-10"
+        >
+          <div class="relative flex-shrink-0">
+            <div
+              class="absolute -inset-1 bg-gradient-to-br from-blue-500 via-red-500 to-yellow-500 rounded-full blur opacity-40"
+            ></div>
+            <img
+              src="assets/foto.jpeg"
+              alt="Naulan"
+              class="relative w-40 h-40 rounded-full border-4 border-white object-cover shadow-lg"
+            />
+            <div
+              class="absolute bottom-1 right-1 bg-white p-2 rounded-full shadow border border-gray-100"
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+                class="w-6 h-6"
+                alt="Google"
+              />
+            </div>
+          </div>
+
+          <div class="flex-1 space-y-4">
+            <div>
+              <div
+                class="flex items-center gap-2 mb-2 text-sm font-bold text-blue-600 tracking-wide uppercase"
+              >
+                <span>🚀 Workshop Web Dev</span>
+                <span class="text-gray-300">•</span>
+                <span>Universitas Lamappapoleonro</span>
+              </div>
+              <h1
+                class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight"
+              >
+                Naulan Darmawan
+              </h1>
+              <p class="text-lg text-gray-500 mt-1 font-medium">
+                Mahasiswa STMIK PPKIA Pradnya Paramita
+              </p>
+            </div>
+
+            <div
+              class="grid md:grid-cols-2 gap-x-8 gap-y-4 pt-2 border-t border-gray-100"
+            >
+              <div class="space-y-2">
+                <p
+                  class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+                >
+                  Role & Skills
+                </p>
+
+                <div class="flex items-center gap-3 text-gray-700">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+                    class="w-5 h-5 opacity-80"
+                  />
+                  <span class="font-medium"
+                    >Google Student Ambassador 2025</span
+                  >
+                </div>
+
+                <div class="flex items-center gap-3 text-gray-700">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/1055/1055666.png"
+                    class="w-5 h-5 opacity-80"
+                  />
+                  <span>Mobile Programmer (Flutter/Kotlin)</span>
+                </div>
+
+                <div class="flex items-center gap-3 text-gray-700">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/5968/5968242.png"
+                    class="w-5 h-5 opacity-80"
+                  />
+                  <span>Web Development (Laravel/HTML/CSS)</span>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <p
+                  class="text-xs font-bold text-gray-400 uppercase tracking-wider"
+                >
+                  Connect
+                </p>
+
+                <div
+                  class="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition cursor-pointer"
+                >
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/174/174857.png"
+                    class="w-5 h-5"
+                  />
+                  <span>Naulan Darmawan</span>
+                </div>
+
+                <div
+                  class="flex items-center gap-3 text-gray-600 hover:text-pink-600 transition cursor-pointer"
+                >
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/174/174855.png"
+                    class="w-5 h-5"
+                  />
+                  <span>@nau_lan22</span>
+                </div>
+
+                <div
+                  class="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition cursor-pointer"
+                >
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                    class="w-5 h-5"
+                  />
+                  <span>NaulanDarmawan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="mb-20">
+      <div class="flex items-center gap-3 mb-8">
+        <span
+          class="bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded-full"
+          >PART 1</span
+        >
+        <h2 class="text-3xl font-bold">Konsep Dasar Web</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white p-8 rounded-2xl border-l-8 border-g-red shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-4xl">🦴</span>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900">HTML</h3>
+              <p class="text-xs font-bold text-g-red uppercase">
+                Struktur & Konten
+              </p>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-4 leading-relaxed">
+            HTML (HyperText Markup Language) adalah kerangka website. Tugasnya
+            menjelaskan "Apa saja yang mau diisikan kedalam website".
+          </p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc ml-5">
+            <li>Apakah Web Mau Diisi Judul? (h1)</li>
+            <li>Apakah Web Mau Diisi Gambar? (img)</li>
+            <li>Apakah Web Mau Diisi Paragraf? (p)</li>
+          </ul>
+        </div>
+
+        <div
+          class="bg-white p-8 rounded-2xl border-l-8 border-g-blue shadow-sm"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-4xl">🎨</span>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900">CSS</h3>
+              <p class="text-xs font-bold text-g-blue uppercase">
+                Gaya & Tata Letak
+              </p>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-4 leading-relaxed">
+            CSS (Cascading Style Sheets) adalah desainer. Tugasnya mengatur
+            "Kita mau hias website secantik apa?".
+          </p>
+          <ul class="text-sm text-gray-600 space-y-2 list-disc ml-5">
+            <li>Warnanya apa? (color)</li>
+            <li>Ukurannya seberapa? (width/height)</li>
+            <li>Posisinya di mana? (center/left/right)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-10">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="text-3xl">🗺️</span>
+        <h2 class="text-3xl font-bold">Rancangan Struktur Website</h2>
+      </div>
+
+      <p class="text-gray-600 mb-8 text-lg">
+        Sebelum menulis kode, kita harus paham pembagian ruangnya. Kita akan
+        menggunakan konsep <strong>Container (Wadah)</strong>.
+      </p>
+
+      <div class="anatomy-container">
+        <div class="wf-main">
+          <span class="label-main">1. MAIN (Layar Penuh)</span>
+
+          <div class="wf-left">
+            <span class="label-left">2. SECTION KIRI (40%)</span>
+
+            <div class="wf-dashed">HEADER (Logo)</div>
+
+            <div class="wf-wrapper">
+              <span class="label-wrapper">3. WRAPPER</span>
+              <span class="text-2xl">📦</span>
+              <div class="font-bold text-sm text-yellow-900 mt-1">
+                Area Konten
+              </div>
+              <div class="text-[10px] text-yellow-700">(Foto, Nama, Bio)</div>
+            </div>
+
+            <div class="wf-dashed">FOOTER</div>
+          </div>
+
+          <div class="wf-right">
+            <span class="label-right">2. SECTION KANAN (60%)</span>
+            <div class="wf-grid-item">IMG</div>
+            <div class="wf-grid-item">IMG</div>
+            <div class="wf-grid-item">IMG</div>
+            <div class="wf-grid-item">IMG</div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mt-8 p-5 bg-yellow-50 border border-yellow-200 rounded-xl text-yellow-900 flex gap-4 items-start shadow-sm"
+      >
+        <span class="text-2xl">💡</span>
+        <div>
+          <p class="font-bold mb-1">Strategi Koding:</p>
+          <p class="text-sm leading-relaxed">
+            Kita mulai dari kotak terluar (Merah), lalu membaginya menjadi dua
+            (Biru & Hijau). Terakhir, kita rapikan isi kotak Biru menggunakan
+            kotak Kuning agar posisinya pas di tengah (Vertikal & Horizontal).
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="mb-20 mt-20 border-t border-gray-200 pt-10">
+      <div class="flex items-center gap-3 mb-8">
+        <span
+          class="bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded-full"
+          >PART 2</span
+        >
+        <h2 class="text-3xl font-bold text-gray-900">
+          Membangun Struktur (HTML)
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <div
+          class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col justify-center"
+        >
+          <h4 class="font-bold text-gray-700 mb-4 flex items-center gap-2">
+            <span class="step-badge">1</span> Wadah Utama
+          </h4>
+          <div class="anatomy-container h-48">
+            <div class="wf-main wf-highlight justify-center items-center">
+              <span class="label-main">MAIN</span>
+              <span class="text-xs text-g-red font-bold"
+                >Layar Penuh (Wadah Kosong)</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-gray-600 mb-2 text-sm">
+            Kita siapkan kotak kardus besar untuk membungkus semuanya.
+          </p>
+          <pre><code><span class="tag-html">&lt;body&gt;</span>
+  <span class="comment-html">&lt;!-- Wadah Utama --&gt;</span>
+  <span class="tag-html">&lt;main</span> <span class="attr-html">class</span>=<span class="val-html">"layar-penuh"</span><span class="tag-html">&gt;</span>
+
+    <span class="comment-html">&lt;!-- Nanti isi website masuk di sini --&gt;</span>
+
+  <span class="tag-html">&lt;/main&gt;</span>
+<span class="tag-html">&lt;/body&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <div
+          class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col justify-center"
+        >
+          <h4 class="font-bold text-gray-700 mb-4 flex items-center gap-2">
+            <span class="step-badge">2</span> Section Kiri (Info)
+          </h4>
+          <div class="anatomy-container h-48">
+            <div class="wf-main">
+              <span class="label-main">MAIN</span>
+              <div class="wf-left wf-highlight justify-center items-center">
+                <span class="label-left">SECTION KIRI</span>
+                <span class="text-[10px] text-g-blue">Header & Footer</span>
+              </div>
+              <div class="wf-right wf-dimmed"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-gray-600 mb-2 text-sm">
+            Buat ruangan kiri. Langsung kita isi <strong>Header</strong> (Logo)
+            dan <strong>Footer</strong> (Copyright).
+          </p>
+          <pre><code>  <span class="tag-html">&lt;main</span> <span class="attr-html">class</span>=<span class="val-html">"layar-penuh"</span><span class="tag-html">&gt;</span>
+
+    <span class="tag-html">&lt;section</span> <span class="attr-html">class</span>=<span class="val-html">"sisi-kiri"</span><span class="tag-html">&gt;</span>
+      <span class="tag-html">&lt;header&gt;</span>
+        <span class="tag-html">&lt;div</span> <span class="attr-html">class</span>=<span class="val-html">"logo"</span><span class="tag-html">&gt;</span>Naulan.Dev<span class="tag-html">&lt;/div&gt;</span>
+      <span class="tag-html">&lt;/header&gt;</span>
+
+      <span class="comment-html">&lt;!-- Nanti Wrapper di sini --&gt;</span>
+
+      <span class="tag-html">&lt;footer&gt;</span>
+        <span class="tag-html">&lt;small&gt;</span>Dibuat di Malang ~ 2025<span class="tag-html">&lt;/small&gt;</span>
+      <span class="tag-html">&lt;/footer&gt;</span>
+    <span class="tag-html">&lt;/section&gt;</span>
+
+  <span class="tag-html">&lt;/main&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <div
+          class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col justify-center"
+        >
+          <h4 class="font-bold text-gray-700 mb-4 flex items-center gap-2">
+            <span class="step-badge">3</span> Konten Wrapper
+          </h4>
+          <div class="anatomy-container h-48">
+            <div class="wf-main">
+              <div class="wf-left">
+                <span class="label-left">KIRI</span>
+                <div class="wf-dashed">Header</div>
+                <div class="wf-wrapper wf-highlight">
+                  <span class="label-wrapper">WRAPPER</span>
+                  <span class="text-[10px]">Isi Konten Utama</span>
+                </div>
+                <div class="wf-dashed">Footer</div>
+              </div>
+              <div class="wf-right wf-dimmed"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-gray-600 mb-2 text-sm">
+            Di antara Header dan Footer, kita buat
+            <code>div class="konten-wrapper"</code>. Ini kunci agar konten bisa
+            di tengah.
+          </p>
+          <pre><code>      <span class="comment-html">&lt;!-- Di antara Header & Footer --&gt;</span>
+      <span class="tag-html">&lt;div</span> <span class="attr-html">class</span>=<span class="val-html">"konten-wrapper"</span><span class="tag-html">&gt;</span>
+
+        <span class="tag-html">&lt;div</span> <span class="attr-html">class</span>=<span class="val-html">"identitas-block"</span><span class="tag-html">&gt;</span>
+          <span class="tag-html">&lt;img</span> <span class="attr-html">src</span>=<span class="val-html">"assets/foto-profil.png"</span> <span class="attr-html">class</span>=<span class="val-html">"avatar"</span> <span class="tag-html">/&gt;</span>
+          <span class="tag-html">&lt;div</span> <span class="attr-html">class</span>=<span class="val-html">"teks-identitas"</span><span class="tag-html">&gt;</span>
+            <span class="tag-html">&lt;h1&gt;</span>Naulan Darmawan<span class="tag-html">&lt;/h1&gt;</span>
+            <span class="tag-html">&lt;p</span> <span class="attr-html">class</span>=<span class="val-html">"jabatan"</span><span class="tag-html">&gt;</span>Mahasiswa & IT Enthusiast<span class="tag-html">&lt;/p&gt;</span>
+          <span class="tag-html">&lt;/div&gt;</span>
+        <span class="tag-html">&lt;/div&gt;</span>
+
+        <span class="tag-html">&lt;p</span> <span class="attr-html">class</span>=<span class="val-html">"bio"</span><span class="tag-html">&gt;</span>Saya suka menjembatani...<span class="tag-html">&lt;/p&gt;</span>
+
+        <span class="comment-html">&lt;!-- Masukkan Skills & Tombol di bawah ini --&gt;</span>
+
+      <span class="tag-html">&lt;/div&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+          <h4 class="font-bold text-gray-700 mb-4 flex items-center gap-2">
+            <span class="step-badge">4</span> Skills & Tombol
+          </h4>
+          <p class="text-gray-600 mb-2 text-sm">
+            Lengkapi isi wrapper dengan skill tags dan tombol aksi.
+          </p>
+          <div class="bg-white border border-gray-200 p-4 rounded text-center">
+            <div class="flex gap-1 justify-center mb-2">
+              <span class="bg-gray-200 text-[8px] p-1 rounded">HTML</span
+              ><span class="bg-gray-200 text-[8px] p-1 rounded">CSS</span>
+            </div>
+            <div class="flex gap-2 justify-center">
+              <button class="bg-black text-white text-[10px] px-2 py-1 rounded">
+                CV</button
+              ><button
+                class="border border-black text-[10px] px-2 py-1 rounded"
+              >
+                Project
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <pre><code>        <span class="tag-html">&lt;div</span> <span class="attr-html">class</span>=<span class="val-html">"skills-container"</span><span class="tag-html">&gt;</span>
+          <span class="tag-html">&lt;span</span> <span class="attr-html">class</span>=<span class="val-html">"tag"</span><span class="tag-html">&gt;</span>HTML5 & CSS3<span class="tag-html">&lt;/span&gt;</span>
+          <span class="tag-html">&lt;span</span> <span class="attr-html">class</span>=<span class="val-html">"tag"</span><span class="tag-html">&gt;</span>UI Design (Figma)<span class="tag-html">&lt;/span&gt;</span>
+          <span class="tag-html">&lt;span</span> <span class="attr-html">class</span>=<span class="val-html">"tag"</span><span class="tag-html">&gt;</span>JavaScript<span class="tag-html">&lt;/span&gt;</span>
+        <span class="tag-html">&lt;/div&gt;</span>
+
+        <span class="tag-html">&lt;div</span> <span class="attr-html">class</span>=<span class="val-html">"tombol-group"</span><span class="tag-html">&gt;</span>
+          <span class="tag-html">&lt;a</span> <span class="attr-html">href</span>=<span class="val-html">"CV.pdf"</span> <span class="attr-html">class</span>=<span class="val-html">"btn-utama"</span><span class="tag-html">&gt;</span>Download CV<span class="tag-html">&lt;/a&gt;</span>
+          <span class="tag-html">&lt;a</span> <span class="attr-html">href</span>=<span class="val-html">"#"</span> <span class="attr-html">class</span>=<span class="val-html">"btn-sekunder"</span><span class="tag-html">&gt;</span>Lihat Project ↗<span class="tag-html">&lt;/a&gt;</span>
+        <span class="tag-html">&lt;/div&gt;</span></code></pre>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <div
+          class="bg-gray-50 rounded-xl p-6 border border-gray-200 flex flex-col justify-center"
+        >
+          <h4 class="font-bold text-gray-700 mb-4 flex items-center gap-2">
+            <span class="step-badge">5</span> Section Kanan
+          </h4>
+          <div class="anatomy-container h-48">
+            <div class="wf-main">
+              <div class="wf-left wf-dimmed"></div>
+              <div class="wf-right wf-highlight">
+                <span class="label-right">SECTION KANAN</span>
+                <div class="wf-grid-item">IMG</div>
+                <div class="wf-grid-item">IMG</div>
+                <div class="wf-grid-item">IMG</div>
+                <div class="wf-grid-item">IMG</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-gray-600 mb-2 text-sm">
+            Buat section kanan berisi 4 gambar. Nanti CSS Grid yang akan
+            menyusunnya.
+          </p>
+          <pre><code>    <span class="comment-html">&lt;!-- Setelah tutup section kiri --&gt;</span>
+    <span class="tag-html">&lt;section</span> <span class="attr-html">class</span>=<span class="val-html">"sisi-kanan"</span><span class="tag-html">&gt;</span>
+      <span class="tag-html">&lt;img</span> <span class="attr-html">src</span>=<span class="val-html">"https://picsum.photos/id/10/200/300"</span> <span class="tag-html">/&gt;</span>
+      <span class="tag-html">&lt;img</span> <span class="attr-html">src</span>=<span class="val-html">"https://picsum.photos/id/12/800/400"</span> <span class="tag-html">/&gt;</span>
+      <span class="tag-html">&lt;img</span> <span class="attr-html">src</span>=<span class="val-html">"https://picsum.photos/id/14/500/500"</span> <span class="tag-html">/&gt;</span>
+      <span class="tag-html">&lt;img</span> <span class="attr-html">src</span>=<span class="val-html">"https://picsum.photos/id/16/600/900"</span> <span class="tag-html">/&gt;</span>
+    <span class="tag-html">&lt;/section&gt;</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-20 mt-20 border-t-4 border-gray-900 pt-10">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-10">
+            <div class="flex items-center gap-3">
+                <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">PART 3</span>
+                <h2 class="text-3xl font-bold text-gray-900">Menghias Tampilan (CSS)</h2>
+            </div>
+            <div class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-lg text-sm font-bold border border-yellow-200 animate-pulse">
+                ⚠️ Coding di file: style.css
+            </div>
+        </div>
+
+        <p class="text-gray-600 mb-10">
+            Saat ini tampilan HTML kita masih berantakan (numpuk ke bawah). Kita akan rapikan secara bertahap. <br>
+            <strong>Ikuti urutan ini dan jangan lompat-lompat ya!</strong>
+        </p>
+
+        <div class="mb-16 border-l-4 border-gray-800 pl-6">
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                <span class="step-badge bg-gray-800">1</span> Pondasi Layout (Kiri-Kanan)
+            </h3>
+            <p class="text-gray-600 mb-4 text-sm">
+                Pertama, kita atur agar halaman tidak bisa discroll dan membagi layar menjadi dua (Kiri & Kanan).
+            </p>
+
+            <pre><code><span class="sel-css">*</span> {
+  <span class="prop-css">box-sizing</span>: <span class="val-css">border-box</span>; <span class="comment-html">/* Wajib: Biar padding ga ngerusak ukuran */</span>
+}
+
+<span class="sel-css">body</span> {
+  <span class="prop-css">margin</span>: <span class="val-css">0</span>;
+  <span class="prop-css">font-family</span>: <span class="val-css">"Outfit", sans-serif</span>;
+  <span class="prop-css">color</span>: <span class="val-css">#1a1a1a</span>;
+
+  <span class="comment-html">/* KUNCI FULL SCREEN: */</span>
+  <span class="prop-css">overflow</span>: <span class="val-css">hidden</span>; <span class="comment-html">/* Matikan scrollbar */</span>
+  <span class="prop-css">height</span>: <span class="val-css">100vh</span>;    <span class="comment-html">/* Tinggi mentok layar monitor */</span>
+}
+
+<span class="sel-css">.layar-penuh</span> {
+  <span class="prop-css">display</span>: <span class="val-css">flex</span>; <span class="comment-html">/* MANTRA: Susun ke samping */</span>
+  <span class="prop-css">height</span>: <span class="val-css">100vh</span>;
+  <span class="prop-css">width</span>: <span class="val-css">100%</span>;
+}</code></pre>
+
+            <div class="mt-6 bg-gray-100 rounded-xl p-4 border-2 border-dashed border-gray-300 flex gap-4 items-center">
+                <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">✓</div>
+                <div>
+                    <h4 class="font-bold text-gray-800 text-sm">CEK HASILNYA SEKARANG!</h4>
+                    <p class="text-xs text-gray-500">Refresh browser. Konten harusnya sudah <strong>berjejer ke samping</strong> (kiri teks, kanan gambar), tapi ukurannya masih berantakan.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-16 border-l-4 border-g-blue pl-6">
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                <span class="step-badge bg-g-blue">2</span> Mengatur Ruangan Kiri & Kanan
+            </h3>
+            <p class="text-gray-600 mb-4 text-sm">
+                Sekarang kita tentukan lebar wilayahnya. Kiri 40%, Kanan 60%.
+            </p>
+
+            <pre><code><span class="sel-css">.sisi-kiri</span> {
+  <span class="prop-css">flex</span>: <span class="val-css">4</span>; <span class="comment-html">/* Lebar 40% */</span>
+  <span class="prop-css">background</span>: <span class="val-css">#fff</span>;
+  <span class="prop-css">padding</span>: <span class="val-css">30px 50px</span>; <span class="comment-html">/* Jarak dalam biar lega */</span>
+
+  <span class="comment-html">/* SUPAYA HEADER DI ATAS & FOOTER DI BAWAH: */</span>
+  <span class="prop-css">display</span>: <span class="val-css">flex</span>;
+  <span class="prop-css">flex-direction</span>: <span class="val-css">column</span>;
+  <span class="prop-css">justify-content</span>: <span class="val-css">space-between</span>;
+  <span class="prop-css">height</span>: <span class="val-css">100%</span>;
+}
+
+<span class="sel-css">.sisi-kanan</span> {
+  <span class="prop-css">flex</span>: <span class="val-css">6</span>; <span class="comment-html">/* Lebar 60% */</span>
+  <span class="prop-css">background-color</span>: <span class="val-css">#f0f0f0</span>;
+}</code></pre>
+
+            <div class="mt-6 bg-blue-50 rounded-xl p-4 border-2 border-dashed border-blue-200 flex gap-4 items-center">
+                <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">✓</div>
+                <div>
+                    <h4 class="font-bold text-blue-900 text-sm">CEK HASILNYA SEKARANG!</h4>
+                    <p class="text-xs text-blue-700">
+                        1. Header (Logo) nempel di atap.<br>
+                        2. Footer (Copyright) nempel di lantai.<br>
+                        3. Konten tengah masih "terbang" gak jelas posisinya.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-16 border-l-4 border-g-yellow pl-6">
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                <span class="step-badge bg-g-yellow">3</span> Menengahkan Konten (Magic)
+            </h3>
+            <p class="text-gray-600 mb-4 text-sm">
+                Ini trik paling penting! Kita suruh <code>.konten-wrapper</code> untuk otomatis mencari posisi tengah.
+            </p>
+
+            <pre><code><span class="sel-css">.konten-wrapper</span> {
+  <span class="prop-css">width</span>: <span class="val-css">100%</span>;
+  <span class="prop-css">max-width</span>: <span class="val-css">480px</span>; <span class="comment-html">/* Batasi lebar biar enak dibaca */</span>
+
+  <span class="comment-html">/* MANTRA TENGAH VERTIKAL: */</span>
+  <span class="prop-css">margin-top</span>: <span class="val-css">auto</span>;
+  <span class="prop-css">margin-bottom</span>: <span class="val-css">auto</span>;
+
+  <span class="prop-css">display</span>: <span class="val-css">flex</span>;
+  <span class="prop-css">flex-direction</span>: <span class="val-css">column</span>;
+  <span class="prop-css">justify-content</span>: <span class="val-css">center</span>;
+}
+
+<span class="sel-css">.logo</span> {
+  <span class="prop-css">font-weight</span>: <span class="val-css">800</span>;
+  <span class="prop-css">font-size</span>: <span class="val-css">1.2rem</span>;
+  <span class="prop-css">letter-spacing</span>: <span class="val-css">-1px</span>;
+}</code></pre>
+
+            <div class="mt-6 bg-yellow-50 rounded-xl p-4 border-2 border-dashed border-yellow-200 flex gap-4 items-center">
+                <div class="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">✓</div>
+                <div>
+                    <h4 class="font-bold text-yellow-900 text-sm">CEK HASILNYA SEKARANG!</h4>
+                    <p class="text-xs text-yellow-700">
+                        Foto, Nama, dan Bio sekarang harusnya <strong>mengapung persis di tengah-tengah</strong> (antara Header dan Footer). Keren kan?
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-16 border-l-4 border-g-green pl-6">
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                <span class="step-badge bg-g-green">4</span> Menyusun Galeri (Grid)
+            </h3>
+            <p class="text-gray-600 mb-4 text-sm">
+                Gambar di kanan pasti masih berantakan/gepeng. Kita rapikan pakai <strong>CSS Grid</strong> agar jadi kotak 2x2.
+            </p>
+
+            <pre><code><span class="sel-css">.sisi-kanan</span> {
+  <span class="comment-html">/* Update styling sisi kanan yg tadi: */</span>
+  <span class="prop-css">display</span>: <span class="val-css">grid</span>;
+  <span class="prop-css">grid-template-columns</span>: <span class="val-css">50% 50%</span>; <span class="comment-html">/* 2 Kolom */</span>
+  <span class="prop-css">grid-template-rows</span>: <span class="val-css">50% 50%</span>;    <span class="comment-html">/* 2 Baris */</span>
+  <span class="prop-css">height</span>: <span class="val-css">100vh</span>;
+  <span class="prop-css">gap</span>: <span class="val-css">0</span>;
+  <span class="prop-css">overflow</span>: <span class="val-css">hidden</span>;
+}
+
+<span class="sel-css">.sisi-kanan img</span> {
+  <span class="prop-css">width</span>: <span class="val-css">100%</span>;
+  <span class="prop-css">height</span>: <span class="val-css">100%</span>;
+  <span class="prop-css">object-fit</span>: <span class="val-css">cover</span>; <span class="comment-html">/* PENTING: Biar gambar ga gepeng! */</span>
+  <span class="prop-css">display</span>: <span class="val-css">block</span>;
+  <span class="prop-css">transition</span>: <span class="val-css">0.5s</span>;
+}</code></pre>
+
+            <div class="mt-6 bg-green-50 rounded-xl p-4 border-2 border-dashed border-green-200 flex gap-4 items-center">
+                <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">✓</div>
+                <div>
+                    <h4 class="font-bold text-green-900 text-sm">CEK HASILNYA SEKARANG!</h4>
+                    <p class="text-xs text-green-700">
+                        Gambar di kanan sekarang harusnya rapi membentuk kotak 2x2 dan memenuhi layar. Tidak ada gambar yang gepeng!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-16 border-l-4 border-purple-500 pl-6">
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                <span class="step-badge bg-purple-600">5</span> Finishing Touches
+            </h3>
+            <p class="text-gray-600 mb-4 text-sm">
+                Layout sudah jadi! Sekarang tinggal "makeup" elemen kecil: Foto profil bulat, tombol keren, dan hover effect. <strong>Salin semua ini ke bagian bawah CSS kalian.</strong>
+            </p>
+
+            <pre><code><span class="comment-html">/* --- COPY SEMUA INI DI BAWAH --- */</span>
+
+<span class="comment-html">/* Foto & Nama Sebelahan */</span>
+<span class="sel-css">.identitas-block</span> { <span class="prop-css">display</span>: <span class="val-css">flex</span>; <span class="prop-css">align-items</span>: <span class="val-css">center</span>; <span class="prop-css">gap</span>: <span class="val-css">20px</span>; <span class="prop-css">margin-bottom</span>: <span class="val-css">20px</span>; }
+<span class="sel-css">.avatar</span> { <span class="prop-css">width</span>: <span class="val-css">70px</span>; <span class="prop-css">height</span>: <span class="val-css">70px</span>; <span class="prop-css">border-radius</span>: <span class="val-css">50%</span>; <span class="prop-css">border</span>: <span class="val-css">3px solid #f3f4f6</span>; <span class="prop-css">object-fit</span>: <span class="val-css">cover</span>; }
+
+<span class="comment-html">/* Typography */</span>
+<span class="sel-css">.identitas-block h1</span> { <span class="prop-css">font-size</span>: <span class="val-css">1.6rem</span>; <span class="prop-css">margin</span>: <span class="val-css">0 0 5px 0</span>; <span class="prop-css">line-height</span>: <span class="val-css">1.1</span>; }
+<span class="sel-css">.jabatan</span> { <span class="prop-css">margin</span>: <span class="val-css">0</span>; <span class="prop-css">color</span>: <span class="val-css">#666</span>; <span class="prop-css">font-weight</span>: <span class="val-css">600</span>; <span class="prop-css">font-size</span>: <span class="val-css">0.9rem</span>; }
+<span class="sel-css">.bio</span> { <span class="prop-css">color</span>: <span class="val-css">#555</span>; <span class="prop-css">line-height</span>: <span class="val-css">1.6</span>; <span class="prop-css">margin-bottom</span>: <span class="val-css">25px</span>; <span class="prop-css">font-size</span>: <span class="val-css">0.95rem</span>; }
+
+<span class="comment-html">/* Skill Tags (Pill Shape) */</span>
+<span class="sel-css">.skills-container</span> { <span class="prop-css">display</span>: <span class="val-css">flex</span>; <span class="prop-css">flex-wrap</span>: <span class="val-css">wrap</span>; <span class="prop-css">gap</span>: <span class="val-css">8px</span>; <span class="prop-css">margin-bottom</span>: <span class="val-css">30px</span>; }
+<span class="sel-css">.tag</span> { <span class="prop-css">background</span>: <span class="val-css">#f3f4f6</span>; <span class="prop-css">color</span>: <span class="val-css">#374151</span>; <span class="prop-css">padding</span>: <span class="val-css">6px 14px</span>; <span class="prop-css">border-radius</span>: <span class="val-css">50px</span>; <span class="prop-css">font-size</span>: <span class="val-css">0.75rem</span>; <span class="prop-css">font-weight</span>: <span class="val-css">600</span>; }
+
+<span class="comment-html">/* Tombol Keren */</span>
+<span class="sel-css">.tombol-group</span> { <span class="prop-css">display</span>: <span class="val-css">flex</span>; <span class="prop-css">gap</span>: <span class="val-css">12px</span>; <span class="prop-css">align-items</span>: <span class="val-css">center</span>; }
+<span class="sel-css">.btn-utama</span> { <span class="prop-css">background</span>: <span class="val-css">#1a1a1a</span>; <span class="prop-css">color</span>: <span class="val-css">white</span>; <span class="prop-css">padding</span>: <span class="val-css">12px 24px</span>; <span class="prop-css">border-radius</span>: <span class="val-css">8px</span>; <span class="prop-css">text-decoration</span>: <span class="val-css">none</span>; <span class="prop-css">font-weight</span>: <span class="val-css">600</span>; <span class="prop-css">font-size</span>: <span class="val-css">0.9rem</span>; <span class="prop-css">transition</span>: <span class="val-css">0.3s</span>; }
+<span class="sel-css">.btn-sekunder</span> { <span class="prop-css">background</span>: <span class="val-css">#f3f4f6</span>; <span class="prop-css">color</span>: <span class="val-css">#1a1a1a</span>; <span class="prop-css">padding</span>: <span class="val-css">12px 24px</span>; <span class="prop-css">border-radius</span>: <span class="val-css">8px</span>; <span class="prop-css">text-decoration</span>: <span class="val-css">none</span>; <span class="prop-css">font-weight</span>: <span class="val-css">600</span>; <span class="prop-css">font-size</span>: <span class="val-css">0.9rem</span>; <span class="prop-css">transition</span>: <span class="val-css">0.3s</span>; }
+
+<span class="sel-css">.btn-utama:hover</span> { <span class="prop-css">background</span>: <span class="val-css">#333</span>; }
+<span class="sel-css">.btn-sekunder:hover</span> { <span class="prop-css">background</span>: <span class="val-css">#e5e7eb</span>; }
+
+<span class="sel-css">footer</span> { <span class="prop-css">color</span>: <span class="val-css">#999</span>; <span class="prop-css">font-size</span>: <span class="val-css">0.75rem</span>; }
+
+<span class="comment-html">/* Efek Zoom Gambar saat Mouse Masuk */</span>
+<span class="sel-css">.sisi-kanan img:hover</span> {
+  <span class="prop-css">filter</span>: <span class="val-css">grayscale(0%)</span>;
+  <span class="prop-css">z-index</span>: <span class="val-css">2</span>;
+  <span class="prop-css">transform</span>: <span class="val-css">scale(1.05)</span>;
+  <span class="prop-css">box-shadow</span>: <span class="val-css">0 10px 20px rgba(0, 0, 0, 0.3)</span>;
+}</code></pre>
+        </div>
+
+        <div class="mb-16 border-l-4 border-gray-400 pl-6">
+            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                <span class="step-badge bg-gray-500">6</span> Mode HP (Responsif)
+            </h3>
+            <p class="text-gray-600 mb-4 text-sm">
+                Terakhir, tambahkan ini agar website kita bisa discroll saat dibuka di HP (layar kecil).
+            </p>
+
+            <pre><code><span class="sel-css">@media</span> (<span class="prop-css">max-width</span>: <span class="val-css">900px</span>) {
+  <span class="sel-css">body</span> { <span class="prop-css">overflow</span>: <span class="val-css">auto</span>; <span class="prop-css">height</span>: <span class="val-css">auto</span>; } <span class="comment-html">/* Nyalakan Scroll */</span>
+
+  <span class="sel-css">.layar-penuh</span> { <span class="prop-css">flex-direction</span>: <span class="val-css">column</span>; <span class="prop-css">height</span>: <span class="val-css">auto</span>; } <span class="comment-html">/* Susun Atas-Bawah */</span>
+
+  <span class="sel-css">.sisi-kiri</span> {
+    <span class="prop-css">padding</span>: <span class="val-css">40px 25px</span>;
+    <span class="prop-css">order</span>: <span class="val-css">2</span>; <span class="comment-html">/* Pindah ke bawah */</span>
+    <span class="prop-css">height</span>: <span class="val-css">auto</span>;
+    <span class="prop-css">justify-content</span>: <span class="val-css">flex-start</span>;
+    <span class="prop-css">gap</span>: <span class="val-css">40px</span>;
+  }
+
+  <span class="sel-css">.konten-wrapper</span> { <span class="prop-css">margin</span>: <span class="val-css">0</span>; <span class="prop-css">max-width</span>: <span class="val-css">100%</span>; }
+
+  <span class="sel-css">.sisi-kanan</span> { <span class="prop-css">height</span>: <span class="val-css">50vh</span>; <span class="prop-css">order</span>: <span class="val-css">1</span>; } <span class="comment-html">/* Pindah ke atas */</span>
+
+  <span class="sel-css">.identitas-block</span> { <span class="prop-css">flex-direction</span>: <span class="val-css">column</span>; <span class="prop-css">text-align</span>: <span class="val-css">center</span>; }
+
+  <span class="sel-css">.tombol-group</span> { <span class="prop-css">justify-content</span>: <span class="val-css">center</span>; }
+}</code></pre>
+        </div>
+
+    </section>
+
+    <footer class="mt-20 text-center text-gray-500 text-sm">
+      <p>Selesai! Sekarang website kamu sudah jadi 🚀</p>
+      <p class="mt-2">Workshop Universitas Lamappapoleonro</p>
+    </footer>
+  </body>
+</html>
